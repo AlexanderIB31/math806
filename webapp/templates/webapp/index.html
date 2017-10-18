@@ -1,0 +1,74 @@
+{% extends 'webapp/base.html' %}
+{% load staticfiles %}
+{% block title %}Численные методы{% endblock %}
+{% block content %}
+<div class="menu_my">
+    <div class="menu_my_full">
+    <div class="menu_item">
+        <img src="{% static 'webapp/mai.png' %}" alt="">  Главная
+    </div>
+    <div class="menu_item">
+		Гиперболическое уравнение
+    </div>
+    <div class="menu_item">
+        Эллиптическое уравнение
+    </div>
+    <div class="menu_item">
+        Параболическое уравнение
+    </div>
+        </div>
+    <div class="menu_my_mob">
+    <img class="show_or_hide" src="{% static 'webapp/mai.png' %}" alt="">
+    <div class="full_menu">
+             <div class="menu_item">
+	Главная
+    </div>
+     <div class="menu_item">
+		{{ hyperbolic.name }}
+    </div>
+    <div class="menu_item">
+        {{ elliptic.name }}
+    </div>
+    <div class="menu_item">
+        {{ parabolic.name }}
+    </div>
+    </div>
+</div>
+</div>
+
+{% include 'webapp/hyperbolic.html' %}
+{% include 'webapp/parabolic.html' %}
+{% include 'webapp/elliptic.html' %}
+<div class="preview center_block">
+    <div class="bubble">
+        <div class="rectangle"><h2>Численные методы</h2></div>
+        <div class="triangle-l"></div>
+        <div class="triangle-r"></div>
+        <div class="info">
+            <h2>Московский Авиационный Институт</h2>
+			<p>Кафедра 806</p>
+            <p>
+                Представляем вам сайт, на котором вы сможете найти численные решения уравнений математической физики:
+                параболического, гиперболического и эллиптического типа. Каждое из уравнений имеет несколько методов решения,
+                с различным порядком аппроксимации. Для большей наглядности и демонстрации качества работы каждого из алгоритмов,
+                мы будем показывать вам графики функции решения каждого из методов, благодаря которым вы сам сможете оценить,
+                какой из методов точнее всех решает данное уравнение. Также, вы сможете самостоятельно задавать необходимые параметры,
+                например, мелкость разбиения сетки.
+
+			</p>
+            <p class="about_us">Коллектив студентов группы 8О-408Б, 2016 - 2017</p>
+        </div>
+   </div>
+    <a class="waves-effect waves-light btn to_solve_btn light-blue"><i class="material-icons right">navigation</i>Перейти к решению</a>
+</div>
+<div class="bottom_block main">
+    <a class="waves-effect waves-light btn btn_bottom light-blue"><i class="material-icons right">navigation</i>Гиперболическое</a>
+    <a class="waves-effect waves-light btn btn_left light-blue"><i class="material-icons left">navigation</i>Параболическое</a>
+    <h2>
+        Выберите тип уравнения
+    </h2>
+    <img class="emb" src="{% static 'webapp/emblema_mai.png' %}" alt="">
+    <a class="waves-effect waves-light btn btn_right light-blue"><i class="material-icons right">navigation</i>Эллиптическое</a>
+</div>
+<div class="hiddendiv common"></div>
+{% endblock %}

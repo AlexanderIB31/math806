@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <meta name="viewport" content="user-scalable=no,width=device-width,height=device-height, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+        <link rel="stylesheet" href="{% static 'webapp/materialize/css/materialize.css' %}">
+        <link rel="stylesheet" href="{% static 'webapp/iconfont/material-icons.css' %}">
+        <link rel="stylesheet" href="{% static 'webapp/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'webapp/noUiSlider/nouislider.css' %}">
+		<link rel="stylesheet" href="{% static 'webapp/style_lent.css' %}">
+        <link rel="stylesheet" href="{% static 'webapp/style.css' %}">
+        <script src="{% static 'webapp/jquery.js' %}"></script>
+        <script src="{% static 'webapp/materialize/js/materialize.js' %}"></script>
+		<script src="{% static 'webapp/noUiSlider/nouislider.js' %}"></script>
+        <script src="{% static 'webapp/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'webapp/script.js' %}"></script>
+        <script src="{% static 'webapp/Chart.min.js' %}"></script>
+        <script src="{% static 'webapp/plot_common.js' %}"></script>
+        <script src="{% static 'webapp/plot_parabolic.js' %}"></script>
+        <script src="{% static 'webapp/plot_hyperbolic.js' %}"></script>
+        <script src="{% static 'webapp/plot_elliptic.js' %}"></script>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <div class="wrapper">
+        {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

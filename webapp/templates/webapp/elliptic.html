@@ -1,0 +1,396 @@
+{% load staticfiles %}
+{% block content %}
+<div class="ellipt right_block">
+	<div class="graf">
+
+		<div class="gr_ellipt gr1 selected_gr">График решения по x</div>
+		<div class="gr_ellipt gr2">Функция ошибок по x</div>
+		<div class="gr_ellipt gr3">График решения по y</div>
+		<div class="gr_ellipt gr4">Функция ошибок по y</div>
+
+        <div class="graf1">
+		<canvas id="elliptic_solutions_x" class="ellipt_graf " ></canvas>
+            </div>
+        <div class="graf2">
+		<canvas id="elliptic_errors_x" class="ellipt_graf " ></canvas>
+            </div>
+        <div class="graf3">
+		<canvas id="elliptic_solutions_y" class="ellipt_graf " ></canvas>
+            </div>
+        <div class="graf4">
+		<canvas id="elliptic_errors_y" class="ellipt_graf " ></canvas>
+            </div>
+		<span class="x" >x = </span>
+		<span class="example-val" id="ellipt_val_x">0</span>
+		<div id="ellipt_x" class="time noUi-target noUi-ltr noUi-horizontal"></div>
+
+<span class="y">y = </span>
+		<span class="example-val" id="ellipt_val_y" >0</span>
+		<div id="ellipt_y" class="time noUi-target noUi-ltr noUi-horizontal" ></div>
+	</div>
+	<div class="conditions">
+
+			<h3> Эллиптическое уравнение</h3>
+				<div class="task" >
+						<img src="{% static 'webapp/elliptic.jpg' %}" alt=""  style="height: 98%;margin-top: 2%;padding: 0;">
+					</div>
+
+	<div class="variables">
+			<ul class="collapsible" data-collapsible="expandable">
+
+				<li>
+					<h5 class="collapsible-header">Параметры уравнения</h5>
+					<div class="block collapsible-body">
+
+						<div class="name">b<sub>x</sub></div>
+						<div class="input-group">
+
+								   <span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="param1">
+												  <span class="glyphicon glyphicon-minus"></span>
+											  </button>
+										  </span>
+							<input id="b_x-elliptic" type="text" name="param1" class="form-control input-number" value="0" min="-1000" max="1000">
+									<span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="param1">
+												  <span class="glyphicon glyphicon-plus"></span>
+											  </button>
+										  </span>
+						</div>
+						<div class="name">b<sub>y</sub></div>
+						<div class="input-group">
+
+										   <span class="input-group-btn">
+													  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="param2">
+														  <span class="glyphicon glyphicon-minus"></span>
+													  </button>
+										   </span>
+						<input id="b_y-elliptic" type="text" name="param2" class="form-control input-number" value="0" min="-1000" max="1000">
+											<span class="input-group-btn">
+													  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="param2">
+														  <span class="glyphicon glyphicon-plus"></span>
+													  </button>
+												  </span>
+						</div>
+
+						<div class="name">c</sub></div>
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default btn-number" data-type="minus" data-field="param3">
+									<span class="glyphicon glyphicon-minus"></span>
+								</button>
+							</span>
+							<input id="c-elliptic" type="text" name="param3" class="form-control input-number" value="0" min="-1000" max="1000">
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default btn-number" data-type="plus" data-field="param3">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
+							</span>
+						</div>
+						<div style="clear:both;"></div>
+
+
+						<div class="name">l <sub>0</sub> </div>
+						<div class="input-group">
+
+								   <span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="ell_param_s3">
+												  <span class="glyphicon glyphicon-minus"></span>
+											  </button>
+										  </span>
+						<input id="min_x-elliptic" type="text" name="ell_param_s3" class="form-control input-number" value="0" min="-1000" max="1000">
+									<span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_param_s3">
+												  <span class="glyphicon glyphicon-plus"></span>
+											  </button>
+									</span>
+						</div>
+						<div class="name">d <sub>0</sub></div>
+						<div class="input-group">
+
+										   <span class="input-group-btn">
+													  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="ell_param_s4">
+														  <span class="glyphicon glyphicon-minus"></span>
+													  </button>
+												  </span>
+						<input id="min_y-elliptic" type="text" name="ell_param_s4" class="form-control input-number" value="0" min="-1000" max="1000">
+																	<span class="input-group-btn">
+													  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_param_s4">
+														  <span class="glyphicon glyphicon-plus"></span>
+													  </button>
+												  </span>
+						</div>
+
+						<div class="name">l <sub>1</sub></div>
+						<div class="input-group">
+
+   <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="ell_param_s5">
+				  <span class="glyphicon glyphicon-minus"></span>
+			  </button>
+		  </span>
+							<input id="max_x-elliptic" type="text" name="ell_param_s5" class="form-control input-number" value="1" min="-1000" max="1000">
+							<span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_param_s5">
+				  <span class="glyphicon glyphicon-plus"></span>
+			  </button>
+		  </span>
+						</div>
+						<div class="name">d <sub>1</sub></div>
+						<div class="input-group">
+							<span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="ell_param_s6">
+				  <span class="glyphicon glyphicon-minus"></span>
+			  </button>
+		  </span>
+							<input id="max_y-elliptic" type="text" name="ell_param_s6" class="form-control input-number" value="1" min="-1000" max="1000">
+							<span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_param_s6">
+				  <span class="glyphicon glyphicon-plus"></span>
+			  </button>
+		  </span>
+						</div>
+						<div class="name">f(x,y) = </div>
+						<input id="f-elliptic" type="text" class="my_input" value="0">
+
+						<div style="clear:both;"></div>
+					</div>
+				</li>
+				<li>
+					<h5 class="collapsible-header">Граничные условия</h5>
+					<div class="block collapsible-body">
+						<div class="name">α<sub>1</sub></div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="ell_gr_1">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+							   </span>
+							<input id="alpha_1-elliptic" type="text" name="ell_gr_1" class="form-control input-number" value="1" min="-1000" max="1000">
+							<span class="input-group-btn">
+							 <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_gr_1">
+										<span class="glyphicon glyphicon-plus"></span>
+							</button>
+									  </span>
+						</div>
+						<div class="name">α<sub>2</sub></div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="ell_gr_2">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+							   </span>
+							<input id="alpha_2-elliptic" type="text" name="ell_gr_2" class="form-control input-number" value="0" min="-1000" max="1000">
+							<span class="input-group-btn">
+							 <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_gr_2">
+										<span class="glyphicon glyphicon-plus"></span>
+							</button>
+									  </span>
+						</div>
+						<div class="name">α<sub>3</sub></div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="ell_gr_3">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+							   </span>
+							<input id="alpha_3-elliptic" type="text" name="ell_gr_3" class="form-control input-number" value="1" min="-1000" max="1000">
+							<span class="input-group-btn">
+							 <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_gr_3">
+										<span class="glyphicon glyphicon-plus"></span>
+							</button>
+									  </span>
+						</div>
+						<div class="name">α<sub>4</sub></div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="ell_gr_4">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+							   </span>
+							<input id="alpha_4-elliptic" type="text" name="ell_gr_4" class="form-control input-number" value="0" min="-1000" max="1000">
+							<span class="input-group-btn">
+							 <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_gr_4">
+										<span class="glyphicon glyphicon-plus"></span>
+							</button>
+									  </span>
+						</div>
+						<div class="name">&#946;<sub>1</sub></div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="ell_gr_5">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+							   </span>
+							<input id="beta_1-elliptic" type="text" name="ell_gr_5" class="form-control input-number" value="0" min="-1000" max="1000">
+							<span class="input-group-btn">
+							 <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_gr_5">
+										<span class="glyphicon glyphicon-plus"></span>
+							</button>
+									  </span>
+						</div>
+						<div class="name">&#946;<sub>2</sub></div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"
+												  data-type="minus" data-field="ell_gr_6">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+							   </span>
+							<input id="beta_2-elliptic" type="text" name="ell_gr_6" class="form-control input-number" value="1" min="-1000" max="1000">
+							<span class="input-group-btn">
+							 <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_gr_6">
+										<span class="glyphicon glyphicon-plus"></span>
+							</button>
+									  </span>
+						</div>
+						<div class="name">&#946;<sub>3</sub></div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"
+												  data-type="minus" data-field="ell_gr_7">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+							   </span>
+							<input id="beta_3-elliptic" type="text" name="ell_gr_7" class="form-control input-number" value="0" min="-1000" max="1000">
+							<span class="input-group-btn">
+							 <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_gr_7">
+										<span class="glyphicon glyphicon-plus"></span>
+							</button>
+									  </span>
+						</div>
+						<div class="name">&#946;<sub>4</sub></div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"
+													data-type="minus" data-field="ell_gr_8">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+							   </span>
+							<input id="beta_4-elliptic" type="text" name="ell_gr_8" class="form-control input-number" value="1" min="-1000" max="1000">
+							<span class="input-group-btn">
+							 <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="ell_gr_8">
+										<span class="glyphicon glyphicon-plus"></span>
+							</button>
+									  </span>
+						</div>
+						<div style="clear:both;"></div>
+						<div class="name">&#966;<sub>1</sub>(y) = </div>
+						<input id="phi_1-elliptic" type="text" class="my_input" value="0">
+
+						<div style="clear:both;"></div>
+						<div class="name">&#966;<sub>2</sub>(y) = </div>
+						<input id="phi_2-elliptic" type="text" class="my_input" value="1 - y*y">
+
+
+						<div style="clear:both;"></div>
+						<div class="name">&#966;<sub>3</sub>(x) = </div>
+						<input id="phi_3-elliptic" type="text" class="my_input" value="0">
+
+						<div style="clear:both;"></div>
+						<div class="name">&#966;<sub>4</sub>(x) = </div>
+						<input id="phi_4-elliptic" type="text" class="my_input" value="x*x - 1">
+
+						<div style="clear:both;"></div>
+					</div>
+
+
+				</li>
+				<li>
+					<h5 class="collapsible-header">Разностная схема</h5>
+					<div class="block collapsible-body">
+						<div>
+							<input id="seidel-elliptic" type="checkbox" class="filled-in">
+							<label for="seidel-elliptic">Зейдель</label>
+						</div>
+						<div>
+							<input id="libman-elliptic" type="checkbox" class="filled-in" checked="checked">
+							<label for="libman-elliptic">Либман</label>
+						</div>
+						<div>
+							<input id="sor-elliptic" type="checkbox" class="filled-in">
+							<label for="sor-elliptic">Верхняя релаксация</label>
+						</div>
+					</div>
+				</li>
+
+				<li>
+					<h5 class="collapsible-header">Параметры сетки</h5>
+					<div class="block collapsible-body">
+
+
+
+						<div class="name">Разбиение по x</div>
+						<div class="input-group">
+
+								   <span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number int"   data-type="minus" data-field="ell_param_s1">
+												  <span class="glyphicon glyphicon-minus"></span>
+											  </button>
+								   </span>
+									<input id="N_X-elliptic" type="text" name="ell_param_s1" class="form-control input-number int" value="10" min="3" max="20">
+									<span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number int" data-type="plus" data-field="ell_param_s1">
+												  <span class="glyphicon glyphicon-plus"></span>
+											  </button>
+										  </span>
+						</div>
+
+						<div class="name">Разбиение по y</div>
+						<div class="input-group">
+
+								   <span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number int"   data-type="minus" data-field="ell_param_s2">
+												  <span class="glyphicon glyphicon-minus"></span>
+											  </button>
+										  </span>
+									<input id="N_Y-elliptic" type="text" name="ell_param_s2" class="form-control input-number int" value="10" min="3" max="20">
+															<span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number int" data-type="plus" data-field="ell_param_s2">
+												  <span class="glyphicon glyphicon-plus"></span>
+											  </button>
+										  </span>
+						</div>
+
+					</div>
+				</li>
+				<li>
+					<h5 class="collapsible-header">Точность вычислений</h5>
+					<div class="block collapsible-body">
+
+						<div class="name">&#949; =</div>
+						<input id="eps-elliptic" type="text" class="my_input" value="0.00001">
+					</div>
+				</li>
+				<li class="relax">
+					<h5 class="collapsible-header">Параметр релаксации</h5>
+					<div class="block collapsible-body">
+
+						<div class="name">w =</div>
+						<input id="relax-elliptic" type="text" class="my_input" value="1.7">
+					</div>
+				</li>
+				<li>
+					<h5 class="collapsible-header">Аналитическое решение</h5>
+					<div class="block collapsible-body">
+
+						<div class="name">u(x,y) =</div>
+						<input id="analytic_solution-elliptic" type="text" class="my_input" value="x*x - y*y">
+					</div>
+				</li>
+				<a id="elliptic_solve_btn" class="waves-effect waves-light btn  light-blue darken-3">Решить</a>
+
+			</ul>
+	</div>
+
+	</div>
+</div>
+{% endblock %}

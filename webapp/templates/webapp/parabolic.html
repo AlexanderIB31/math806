@@ -1,0 +1,343 @@
+{% load staticfiles %}
+{% block content %}
+<div class="left_block parab">
+    <div class="graf">
+
+        <div class="gr gr1 selected_gr">Графики решения</div>
+        <div class="gr gr2">Функция ошибок</div>
+<div class="graf1">
+        <canvas id="parabolic_solutions" class="hyperb_graf"></canvas>
+</div>
+        <div class="graf2">
+        <canvas id="parabolic_errors" class="hyperb_graf"></canvas>
+            </div>
+        <span class="time">t = </span>
+        <span class="example-val time" id="time_parab">0</span>
+        <div id="time_val_par" class="time noUi-target noUi-ltr noUi-horizontal"></div>
+    </div>
+
+    <div class="conditions">
+
+            <h3> Параболическое уравнение
+
+            </h3>
+
+
+    <div class="task" >
+                        <img src="{% static 'webapp/parabolic.jpg' %}" alt=""  style="height: 98%;margin-top: 2%;padding: 0; ">
+                    </div>
+
+    <div class="variables">
+                <ul class="collapsible" data-collapsible="expandable">
+                    <li>
+                        <h5 class="collapsible-header">Параметры уравнения</h5>
+                        <div class="block collapsible-body">
+
+                            <div class="name">a</div>
+                            <div class="input-group">
+
+       <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="par_param1">
+                      <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+              </span>
+                                <input type="text" name="par_param1" class="form-control input-number" value="1" min="0"
+                                       max="1000" id="a-parabolic">
+                                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="par_param1">
+                      <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+              </span>
+                            </div>
+                            <div class="name">b</div>
+                            <div class="input-group">
+
+       <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="par_param2">
+                      <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+              </span>
+                                <input type="text" name="par_param2" class="form-control input-number" value="0" min="-1000"
+                                       max="1000" id="b-parabolic">
+                                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="par_param2">
+                      <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+              </span>
+                            </div>
+
+                            <div class="name">c</div>
+                            <div class="input-group">
+
+       <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="par_param3">
+                      <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+              </span>
+                                <input type="text" name="par_param3" class="form-control input-number" value="0" min="-1000"
+                                       max="1000" id="c-parabolic">
+                                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="par_param3">
+                      <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+              </span>
+                            </div>
+                             <div class="name">l<sub>0</div>
+                            <div class="input-group">
+
+       <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="par_param_s5">
+                      <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+              </span>
+                                <input type="text" name="par_param_s5" class="form-control input-number" value="0"
+                                       min="0" max="10" id="min_x-parabolic">
+                                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="par_param_s5">
+                      <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+              </span>
+                            </div>
+
+                            <div class="name">l<sub>1</div>
+                            <div class="input-group">
+
+       <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="par_param_s3">
+                      <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+              </span>
+                                <input type="text" name="par_param_s3" class="form-control input-number" value="3.14"
+                                       min="-1000" max="1000" id="max_x-parabolic">
+                                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="par_param_s3">
+                      <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+              </span>
+                            </div>
+                            <div class="name">T</div>
+                            <div class="input-group">
+
+       <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number int" data-type="minus" data-field="par_param_s4">
+                      <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+              </span>
+                                <input type="text" name="par_param_s4" class="form-control input-number int" value="1"
+                                       min="0" max="300" id="max_t-parabolic">
+                                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number int" data-type="plus" data-field="par_param_s4">
+                      <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+              </span>
+                            </div>
+
+
+                            <div class="name">f(x,t) =</div>
+                            <input type="text" class="my_input" id="f-parabolic" value="0">
+                            <text id="sigma">
+                                <text>σ =</text>
+                                <text></text>
+                            </text>
+                        </div>
+                    </li>
+                    <li>
+                        <h5 class="collapsible-header">Начальное условие</h5>
+                        <div class="block collapsible-body">
+
+                            <div class="name">Ψ(x) =</div>
+                            <input type="text" class="my_input" id="psi-parabolic" value="cos(x)">
+                        </div>
+                    </li>
+                    <li>
+                        <h5 class="collapsible-header">Граничные условия</h5>
+                        <div class="block collapsible-body">
+
+
+                            <div class="name">&#945;</div>
+                            <div class="input-group">
+
+                       <span class="input-group-btn">
+                                  <button type="button" class="btn btn-default btn-number" data-type="minus"
+                                          data-field="par_param4">
+                                      <span class="glyphicon glyphicon-minus"></span>
+                                  </button>
+                              </span>
+                                <input type="text" name="par_param4" class="form-control input-number" value="0" min="-1000"
+                                       max="1000" id="alpha-parabolic">
+                                <span class="input-group-btn">
+                              <button type="button" class="btn btn-default btn-number" data-type="plus"
+                                      data-field="par_param4">
+                                  <span class="glyphicon glyphicon-plus"></span>
+                              </button>
+                            </span>
+                            </div>
+
+
+                            <div class="name">    &#946;</div>
+                            <div class="input-group">
+
+                       <span class="input-group-btn">
+                                  <button type="button" class="btn btn-default btn-number" data-type="minus"
+                                          data-field="par_param7">
+                                      <span class="glyphicon glyphicon-minus"></span>
+                                  </button>
+                              </span>
+                                <input type="text" name="par_param7" class="form-control input-number" value="1" min="-1000"
+                                       max="1000" id="beta-parabolic">
+                                <span class="input-group-btn">
+                              <button type="button" class="btn btn-default btn-number" data-type="plus"
+                                      data-field="par_param7">
+                                  <span class="glyphicon glyphicon-plus"></span>
+                              </button>
+                            </span>
+                            </div>
+
+
+                            <div class="name">    &#947;</div>
+                            <div class="input-group">
+
+                       <span class="input-group-btn">
+                                  <button type="button" class="btn btn-default btn-number" data-type="minus"
+                                          data-field="par_param5">
+                                      <span class="glyphicon glyphicon-minus"></span>
+                                  </button>
+                              </span>
+                                <input type="text" name="par_param5" class="form-control input-number" value="0" min="-1000"
+                                       max="1000" id="gamma-parabolic">
+                                <span class="input-group-btn">
+                              <button type="button" class="btn btn-default btn-number" data-type="plus"
+                                      data-field="par_param5">
+                                  <span class="glyphicon glyphicon-plus"></span>
+                              </button>
+                            </span>
+                            </div>
+
+
+                            <div class="name">    &#948;</div>
+                            <div class="input-group">
+
+                       <span class="input-group-btn">
+                                  <button type="button" class="btn btn-default btn-number" data-type="minus"
+                                          data-field="par_param6">
+                                      <span class="glyphicon glyphicon-minus"></span>
+                                  </button>
+                              </span>
+                                <input type="text" name="par_param6" class="form-control input-number" value="1" min="-1000"
+                                       max="1000" id="delta-parabolic">
+                                <span class="input-group-btn">
+                              <button type="button" class="btn btn-default btn-number" data-type="plus"
+                                      data-field="par_param6">
+                                  <span class="glyphicon glyphicon-plus"></span>
+                              </button>
+                            </span>
+                            </div>
+
+
+                            <div class="name">φ<sub>0</sub>(t) =</div>
+                            <input type="text" class="my_input" id="phi_0-parabolic" value="exp(-t)">
+                            <div style="clear:both"></div>
+                            <div class="name">φ<sub>l</sub>(t) =</div>
+                            <input type="text" class="my_input" id="phi_l-parabolic" value="-exp(-t)">
+                        </div>
+
+
+                    </li>
+                    <li>
+                        <h5 class="collapsible-header">Разностная схема</h5>
+                        <div class="block collapsible-body">
+                            <div>
+                                <input type="checkbox" class="filled-in" id="explicit-parabolic">
+                                <label for="explicit-parabolic">Явная схема</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" class="filled-in" id="implicit-parabolic" checked="checked">
+                                <label for="implicit-parabolic">Неявная схема</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" class="filled-in" id="crank_nicolson-parabolic">
+                                <label for="crank_nicolson-parabolic">Схема Кранка-Николсона</label>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <h5 class="collapsible-header">Аппроксимация граничных условий</h5>
+                        <div class="block collapsible-body">
+
+
+                            <div>
+
+                                <input type="checkbox" class="filled-in" id="o1p2-parabolic">
+                                <label for="o1p2-parabolic">1 порядка по двум точкам</label>
+
+                            </div>
+                            <div>
+                                <input type="checkbox" class="filled-in" id="o2p2-parabolic" checked="checked">
+                                <label for="o2p2-parabolic">2 порядка по двум точкам</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" class="filled-in" id="o2p3-parabolic">
+                                <label for="o2p3-parabolic">2 порядка по трем точкам</label>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <h5 class="collapsible-header">Параметры сетки</h5>
+                        <div class="block collapsible-body">
+
+
+                            <div class="name">Разбиение по t</div>
+                            <div class="input-group">
+
+                           <span class="input-group-btn">
+                                      <button type="button" class="btn btn-default btn-number int" data-type="minus" data-field="par_param_s1">
+                                          <span class="glyphicon glyphicon-minus"></span>
+                                      </button>
+                            </span>
+                                <input type="text" name="par_param_s1" class="form-control input-number int" value="50"
+                                       min="5" step="1" max="100" id="K-parabolic">
+                                <span class="input-group-btn">
+                                      <button type="button" class="btn btn-default btn-number int" data-type="plus" data-field="par_param_s1">
+                                          <span class="glyphicon glyphicon-plus"></span>
+                                      </button>
+                                  </span>
+                            </div>
+
+                            <div class="name">Разбиение по x</div>
+                            <div class="input-group">
+
+       <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number int" data-type="minus" data-field="par_param_s2">
+                      <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+              </span>
+                                <input type="text" name="par_param_s2" class="form-control input-number int" value="50"
+                                       min="5" step="1" max="100" id="N-parabolic">
+                                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number int" data-type="plus" data-field="par_param_s2">
+                      <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+              </span>
+                            </div>
+
+
+                        </div>
+
+                    </li>
+                    <li>
+                        <h5 class="collapsible-header">Аналитическое решение</h5>
+                        <div class="block collapsible-body">
+
+                            <div class="name">u(x,t) =</div>
+                            <input type="text" class="my_input" id="analytic_solution-parabolic" value="exp(-t) * cos(x)">
+                        </div>
+                    </li>
+                    <a class="waves-effect waves-light btn  light-blue darken-3" id="parabolic_solve_btn">Решить</a>
+                </ul>
+    </div>
+
+
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,347 @@
+{% load staticfiles %}
+{% block content %}
+<div class="bottom_block giperb">
+	<div class="graf">
+		<div class="gr gr1 selected_gr">Графики решения</div>
+		<div class="gr gr2">Функция ошибок</div>
+		<div class="graf1">
+		<canvas id="hyperbolic_solutions" class="hyperb_graf" ></canvas>
+			</div>
+		<div class="graf2">
+				<canvas id="hyperbolic_errors" class="hyperb_graf" ></canvas>
+		</div>
+		<span class="time">t = </span>
+		<span class="example-val time" id="slider-step-value_hyperb">0</span>
+		<div id="time_hyperb" class="time noUi-target noUi-ltr noUi-horizontal"></div>
+	</div>
+	<div class="conditions">
+		<form>
+			<h3> Гиперболическое уравнение</h3>
+				<div class="task" >
+						<img src="{% static 'webapp/hyperbolic.jpg' %}" alt="" style="height: 98%; margin-top:2%; ">
+					</div>
+
+	<div class="variables">
+			<ul class="collapsible" data-collapsible="expandable">
+
+				<li>
+
+					<h5 class="collapsible-header">Параметры уравнения</h5>
+					<div class="block collapsible-body">
+
+						<div class="name">a</div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="param1">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+									  </span>
+							<input id="a-hyperbolic" type="text" name="param1" class="form-control input-number" value="1" min="0.0" max="1000">
+							<span class="input-group-btn">
+								  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="param1">
+									  <span class="glyphicon glyphicon-plus"></span>
+								  </button>
+							</span>
+						</div>
+						<div class="name">b</div>
+						<div class="input-group">
+
+									   <span class="input-group-btn">
+												  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="param2">
+													  <span class="glyphicon glyphicon-minus"></span>
+												  </button>
+											  </span>
+																<input id="b-hyperbolic" type="text" name="param2" class="form-control input-number" value="0" min="-1000.0" max="1000">
+																<span class="input-group-btn">
+												  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="param2">
+													  <span class="glyphicon glyphicon-plus"></span>
+												  </button>
+											  </span>
+						</div>
+						<div class="name">c</div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="param3">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+									  </span>
+														<input id="c-hyperbolic" type="text" name="param3" class="form-control input-number" value="0" min="-1000.0" max="1000.0">
+														<span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="param3">
+											  <span class="glyphicon glyphicon-plus"></span>
+										  </button>
+									  </span>
+						</div>
+						<div class="name">e</div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="param4">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+									  </span>
+							<input id="e-hyperbolic" type="text" name="param4" class="form-control input-number" value="0" min="-1000" max="1000">
+							<span class="input-group-btn">
+								  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="param4">
+									  <span class="glyphicon glyphicon-plus"></span>
+								  </button>
+							</span>
+						</div>
+						<div style="clear:both;"></div>
+
+						<div class="name">l<sub>0</sub></div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="param_s5">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+									  </span>
+														<input id="min_x-hyperbolic" type="text" name="param_s5" class="form-control input-number" value="0" min="-1000.0" max="1000">
+														<span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="param_s5">
+											  <span class="glyphicon glyphicon-plus"></span>
+										  </button>
+									  </span>
+						</div>
+						<div class="name">l<sub>1</sub></div>
+						<div class="input-group">
+
+								   <span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="param_s3">
+												  <span class="glyphicon glyphicon-minus"></span>
+											  </button>
+										  </span>
+															<input id="max_x-hyperbolic" type="text" name="param_s3" class="form-control input-number" value="3.141596" min="-1000" max="1000">
+															<span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="param_s3">
+												  <span class="glyphicon glyphicon-plus"></span>
+											  </button>
+										  </span>
+						</div>
+
+						<div class="name">T</div>
+						<div class="input-group">
+
+								   <span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number int"   data-type="minus" data-field="param_s4">
+												  <span class="glyphicon glyphicon-minus"></span>
+											  </button>
+										  </span>
+															<input id="max_t-hyperbolic" type="text" name="param_s4" class="form-control input-number int" value="1" min="0" max="1000">
+															<span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number int" data-type="plus" data-field="param_s4">
+												  <span class="glyphicon glyphicon-plus"></span>
+											  </button>
+										  </span>
+						</div>
+						<div class="name">f(x,t) = </div>
+						<input id="f-hyperbolic" type="text" class="my_input" value="0">
+
+						<div style="clear:both;"></div>
+
+
+					</div>
+				</li>
+				<li>
+					<h5 class="collapsible-header">Начальное условие</h5>
+					<div class="block collapsible-body">
+						<div class="name">Ψ<sub>0</sub>(x) = </div>
+						<input id="psi_1-hyperbolic" type="text" class="my_input" value="sin(x) + cos(x)">
+						<div style="clear:both;"></div>
+						<div class="name">Ψ<sub>1</sub>(x) = </div>
+						<input id="psi_2-hyperbolic" type="text" class="my_input" value="-(sin(x) + cos(x))">
+					</div>
+				</li>
+				<li>
+					<h5 class="collapsible-header">Граничные условия</h5>
+					<div class="block collapsible-body">
+						<div style="clear:both;"></div>
+						<div class="name">&#966;<sub>0</sub>(t) = </div>
+						<input id="phi_0-hyperbolic" type="text" class="my_input" value="0">
+
+						<div style="clear:both;"></div>
+						<div class="name">&#966;<sub>1</sub>(t) = </div>
+						<input id="phi_l-hyperbolic" type="text" class="my_input" value="0">
+
+						<div style="clear:both;"></div>
+						<div class="name">α</div>
+						<div class="input-group">
+
+							   <span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="hyperb_alpha">
+											  <span class="glyphicon glyphicon-minus"></span>
+										  </button>
+							   </span>
+							<input id="alpha-hyperbolic" type="text" name="hyperb_alpha" class="form-control input-number" value="1" min="-1000.0" max="1000">
+							<span class="input-group-btn">
+										  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="hyperb_alpha">
+											  <span class="glyphicon glyphicon-plus"></span>
+										  </button>
+							 </span>
+						</div>
+						<div class="name">&#946;</div>
+
+						<div class="input-group">
+
+								   <span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="hyperb_beta">
+												  <span class="glyphicon glyphicon-minus"></span>
+											  </button>
+										  </span>
+															<input id="beta-hyperbolic" type="text" name="hyperb_beta" class="form-control input-number" value="-1" min="-1000.0" max="1000.0">
+															<span class="input-group-btn">
+											  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="hyperb_beta">
+												  <span class="glyphicon glyphicon-plus"></span>
+											  </button>
+										  </span>
+						</div>
+
+						<div class="name">&#947;</div>
+
+						<div class="input-group">
+
+										   <span class="input-group-btn">
+													  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="hyperb_gamma">
+														  <span class="glyphicon glyphicon-minus"></span>
+													  </button>
+												  </span>
+																	<input id="gamma-hyperbolic" type="text" name="hyperb_gamma" class="form-control input-number" value="1" min="-1000.0" max="1000.0">
+																	<span class="input-group-btn">
+													  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="hyperb_gamma">
+														  <span class="glyphicon glyphicon-plus"></span>
+													  </button>
+												  </span>
+						</div>
+
+						<div class="name">&#948;</div>
+
+						<div class="input-group">
+
+										   <span class="input-group-btn">
+															  <button type="button" class="btn btn-default btn-number"   data-type="minus" data-field="hyperb_delta">
+																  <span class="glyphicon glyphicon-minus"></span>
+															  </button>
+														  </span>
+														<input id="delta-hyperbolic" type="text" name="hyperb_delta" class="form-control input-number" value="-1" min="-1000.0" max="1000.0">
+														<span class="input-group-btn">
+														  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="hyperb_delta">
+															  <span class="glyphicon glyphicon-plus"></span>
+															  </button>
+										  </span>
+						</div>
+
+					</div>
+				</li>
+				<li>
+					<h5 class="collapsible-header">Разностная схема</h5>
+					<div class="block collapsible-body">
+
+						<div>
+							<input id="explicit-hyperbolic" type="checkbox" class="filled-in">
+							<label for="explicit-hyperbolic">Явная схема</label>
+						</div>
+						<div>
+							<input id="implicit-hyperbolic" type="checkbox" class="filled-in" checked="checked">
+							<label for="implicit-hyperbolic">Неявная схема</label>
+						</div>
+					</div>
+
+				</li>
+				<li>
+					<h5 class="collapsible-header">Аппроксимация начальных условий</h5>
+					<div class="block collapsible-body">
+
+						<div>
+							<input id="init_1-hyperbolic" type="checkbox" class="filled-in">
+							<label for="init_1-hyperbolic">1 порядка</label>
+						</div>
+						<div>
+							<input id="init_2-hyperbolic" type="checkbox" class="filled-in" checked="checked">
+							<label for="init_2-hyperbolic">2 порядка</label>
+						</div>
+					</div>
+
+				</li>
+				<li>
+					<h5 class="collapsible-header">Аппроксимация граничных условий</h5>
+					<div class="block collapsible-body">
+
+
+						<div>
+							<input type="checkbox" class="filled-in" id="o1p2-hyperbolic">
+							<label for="o1p2-hyperbolic">1 порядка по двум точкам</label>
+						</div>
+						<div>
+							<input type="checkbox" class="filled-in" id="o2p2-hyperbolic" checked="checked">
+							<label for="o2p2-hyperbolic">2 порядка по двум точкам</label>
+						</div>
+						<div>
+							<input type="checkbox" class="filled-in" id="o2p3-hyperbolic">
+							<label for="o2p3-hyperbolic">2 порядка по трем точкам</label>
+						</div>
+					</div>
+				</li>
+				<li>
+
+					<h5 class="collapsible-header">Параметры сетки</h5>
+					<div class="block collapsible-body">
+
+
+
+						<div class="name">Разбиение по t</div>
+						<div class="input-group">
+
+   <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number int"   data-type="minus" data-field="param_s1">
+				  <span class="glyphicon glyphicon-minus"></span>
+			  </button>
+		  </span>
+
+							<input id="K-hyperbolic" type="text" name="param_s1" class="form-control input-number int" value="50" min="5" step="1" max="200">
+							<span class="input-group-btn int">
+			  <button type="button" class="btn btn-default btn-number int" data-type="plus" data-field="param_s1">
+				  <span class="glyphicon glyphicon-plus"></span>
+			  </button>
+		  </span>
+						</div>
+
+						<div class="name">Разбиение по x</div>
+						<div class="input-group">
+
+   <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number int"   data-type="minus" data-field="param_s2">
+				  <span class="glyphicon glyphicon-minus"></span>
+			  </button>
+		  </span>
+							<input id="N-hyperbolic" type="text" name="param_s2" class="form-control input-number int" value="50" min="3" step="1" max="200">
+							<span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number int" data-type="plus" data-field="param_s2">
+				  <span class="glyphicon glyphicon-plus"></span>
+			  </button>
+		  </span>
+						</div>
+
+
+
+
+					</div>
+
+				</li>
+				<li>
+					<h5 class="collapsible-header">Аналитическое решение</h5>
+					<div class="block collapsible-body">
+
+						<div class="name">u(x,t) =</div>
+						<input id="analytic_solution-hyperbolic" type="text" class="my_input" value="sin(x - t) + cos(x + t)">
+					</div>
+				</li>
+				<a id="hyperbolic_solve_btn" class="waves-effect waves-light btn  light-blue darken-3">Решить</a>
+			</ul>
+	</div>
+		</form>
+	</div>
+</div>
+{% endblock %}
